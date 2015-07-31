@@ -1,4 +1,5 @@
 <?php
 
-resource('/', 'ChatController');
+get('/', 'ChatController@index');
+post('/', 'ChatController@store');
 

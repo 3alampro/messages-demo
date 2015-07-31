@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Chat;
+use App\Message;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -11,16 +11,16 @@ class newMessage extends Event implements ShouldBroadcast
 {
     use SerializesModels;
     /**
-     * @var Chat
+     * @var Message
      */
     public $message;
 
     /**
      * Create a new event instance.
      *
-     * @param Chat $message
+     * @param Message $message
      */
-    public function __construct(Chat $message)
+    public function __construct(Message $message)
     {
         $this->message = $message;
     }

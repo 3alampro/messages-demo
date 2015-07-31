@@ -46,10 +46,14 @@
         <br>
         <br>
         <form action="{{ url() }}/" method="POST">
+            <span class="loading" style="display: none; font-size: 18px;">
+                sending ...
+            </span>
             {{ csrf_field() }}
             <input type="text" name="name" placeholder="Name:" class="form-control" required>
             <input type="text" name="message" id="message"  placeholder="Your message:" required class="form-control">
             <input type="submit" class="btn btn-primary" value="Send">
+
         </form>
     </div>
 </div>
@@ -70,16 +74,18 @@
     var channel = pusher.subscribe('new-message');
 
     channel.bind('App\\Events\\newMessage', function(data) {
-        console.log(data);
         $('.table').append('<tr><td>'+ data.message.name + '</td><td>'+ data.message.message + '</td></tr>')
     });
 
     $('form').submit(function (e) {
         e.preventDefault();
 
+        $('.loading').show();
+
         posts = $(this).serializeArray();
         $.post('{{ url() }}/', posts, function () {
             $('#message').val('');
+            $('.loading').hide();
         });
 
         return false;

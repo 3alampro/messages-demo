@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Chat;
+use App\Message;
 use App\Events\newMessage;
 use App\Http\Requests;
-use App\Http\Requests\ChatRequest;
+use App\Http\Requests\MessageRequest;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
     public function index()
     {
-        $data['chats'] = Chat::all();
+        $data['chats'] = Message::all();
 
-        return view('welcome', $data);
+        return view('index', $data);
     }
 
-    public function store(ChatRequest $request)
+    public function store(MessageRequest $request)
     {
-        $message = Chat::create($request->all());
+        $message = Message::create($request->all());
 
         event(new newMessage($message));
 
-        return $message;
+        return response('', 200);
     }
 }

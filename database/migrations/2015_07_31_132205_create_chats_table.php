@@ -12,7 +12,7 @@ class CreateChatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chats', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('message');
@@ -27,6 +27,6 @@ class CreateChatsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('chats');
+        Schema::drop('messages');
     }
 }
